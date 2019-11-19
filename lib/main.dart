@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:basic_wedget/Birthdays.dart';
+import 'package:basic_wedget/Gratitude.dart';
+import 'package:basic_wedget/Reminders.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,37 +29,60 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _currentIndex = 0;
+  List _listPages = List();
+  Widget _currentPage;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    super.initState();
+    _listPages
+      ..add(Birthdays())
+      ..add(Gratitude())
+      ..add(Reminders());
+    _currentPage = Birthdays();
+  }
+
+  void _changePage(int selectedIndex) {
     setState(() {
-      _counter++;
+      _currentIndex = selectedIndex;
+      _currentPage = _listPages[selectedIndex];
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: <Widget>[
-                RowWidget(),
-                Divider(),
-                RowAndColumnWidget(),
-                Divider(),
-                RowAndStackWidget(),
-                Divider(),
-                Text('End Of line')
-              ],
-            ),
+       body: SafeArea(
+         child: Padding(
+           padding: EdgeInsets.all(16),
+           child: _currentPage,
+         ),
+       ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cake),
+              title: Text('birthday')
           ),
-        )));
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sentiment_satisfied),
+            title: Text('Gratitude'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_alarm),
+            title: Text('Reminders'),
+          ),
+        ],
+        onTap: (selectedIndex) => _changePage(selectedIndex),
+      ),
+    );
   }
 
   Container _buildContainer(Color color) {
