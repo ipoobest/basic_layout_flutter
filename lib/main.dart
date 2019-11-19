@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'gridview_builder.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -41,9 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: SafeArea(
-            child: SingleChildScrollView(
+            child: GridViewBuilderWidget()
 
-        )));
+        ));
   }
 
 }
