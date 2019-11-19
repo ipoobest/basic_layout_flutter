@@ -28,69 +28,66 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
-  List _listPages = List();
-  Widget _currentPage;
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _listPages
-      ..add(Birthdays())
-      ..add(Gratitude())
-      ..add(Reminders());
-    _currentPage = Birthdays();
+
+    _tabController = TabController(vsync: this, length: 3);
+    _tabController.addListener(_tabChanged);
   }
 
-  void _changePage(int selectedIndex) {
-    setState(() {
-      _currentIndex = selectedIndex;
-      _currentPage = _listPages[selectedIndex];
-    });
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  void _tabChanged() {
+// Check if Tab Controller index is changing, otherwise we get the notice twice
+    if (_tabController.indexIsChanging) {
+      print('tabChanged: ${_tabController.index}');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        appBar: AppBar(
-          title: Text(widget.title),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: SafeArea(
+          child: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          Birthdays(),
+          Gratitude(),
+          Reminders(),
+        ],
+      )),
+      bottomNavigationBar: SafeArea(
+        child: TabBar(
+          controller: _tabController,
+          labelColor: Colors.black54,
+          unselectedLabelColor: Colors.black38,
+          tabs: [
+            Tab(
+              icon: Icon(Icons.cake),
+              text: 'Birthdays',
+            ),
+            Tab(
+              icon: Icon(Icons.sentiment_satisfied),
+              text: 'Gratitude',
+            ),
+            Tab(
+              icon: Icon(Icons.access_alarm),
+              text: 'Reminders',
+            ),
+          ],
         ),
-       body: SafeArea(
-         child: Container()
-       ),
-
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.red,
-          shape: CircularNotchedRectangle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.access_alarm),
-                color: Colors.white,
-                onPressed: (){},
-              ),
-              IconButton(
-                icon: Icon(Icons.bookmark_border),
-                color: Colors.white,
-                onPressed: (){},
-              ),
-              IconButton(
-                icon: Icon(Icons.flight),
-                color: Colors.white,
-                onPressed: (){},
-              ),
-              Divider(),
-            ],
-          ),
-        ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red,
-        onPressed: () {},
-        child: Icon(Icons.add),
       ),
     );
   }
