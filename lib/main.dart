@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'HeaderWidget.dart';
+import 'RowWidget.dart';
+import 'RowWithCardWidget.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -41,9 +45,19 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: SafeArea(
-            child: SingleChildScrollView(
-
-        )));
+            child: ListView.builder(
+              itemCount: 50,
+              itemBuilder: (BuildContext context, int index){
+                if(index == 0){
+                  return HeaderWidget(index: index);
+                }else if (index >= 1 && index <= 10) {
+                  return RowWithCardWidget(index: index);
+                } else {
+                  return RowWidget(index: index);
+                }
+              },
+            ),
+        ));
   }
 
 }
