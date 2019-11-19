@@ -58,29 +58,39 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
        body: SafeArea(
-         child: Padding(
-           padding: EdgeInsets.all(16),
-           child: _currentPage,
-         ),
+         child: Container()
        ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.cake),
-              title: Text('birthday')
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.red,
+          shape: CircularNotchedRectangle(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.access_alarm),
+                color: Colors.white,
+                onPressed: (){},
+              ),
+              IconButton(
+                icon: Icon(Icons.bookmark_border),
+                color: Colors.white,
+                onPressed: (){},
+              ),
+              IconButton(
+                icon: Icon(Icons.flight),
+                color: Colors.white,
+                onPressed: (){},
+              ),
+              Divider(),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sentiment_satisfied),
-            title: Text('Gratitude'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_alarm),
-            title: Text('Reminders'),
-          ),
-        ],
-        onTap: (selectedIndex) => _changePage(selectedIndex),
+        ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
