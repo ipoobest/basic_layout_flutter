@@ -1,3 +1,6 @@
+import 'package:basic_wedget/sliver_app_bar.dart';
+import 'package:basic_wedget/sliver_grid.dart';
+import 'package:basic_wedget/sliver_list.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -26,24 +29,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          elevation: 0.0,
         ),
-        body: SafeArea(
-            child: SingleChildScrollView(
-
-        )));
+        body: CustomScrollView(
+          slivers: <Widget>[
+             SliverAppBarWidget(),
+             SliverListWidget(),
+             SliverGridWidget(),
+          ],
+        ));
   }
-
 }
+
+
