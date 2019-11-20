@@ -1,3 +1,5 @@
+import 'package:basic_wedget/StackFavoriteWidget.dart';
+import 'package:basic_wedget/StackWidget.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -41,8 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: SafeArea(
-            child: SingleChildScrollView(
-
+            child: ListView.builder(
+              itemCount: 7,
+              itemBuilder: (BuildContext context, int index) {
+                if (index.isEven) {
+                  return const StackWidget();
+                } else {
+                  return const StackFavoriteWidget();
+                }
+              },
         )));
   }
 
