@@ -12,9 +12,10 @@ class _HomeState extends State<Home> {
   void _markTripCompleted() {
     print("_markTripCompleted");
   }
+
   void _deleteTrip() {
 // Delete trip from Database or web service
-  print("_deleteTrip");
+    print("_deleteTrip");
   }
 
   @override
@@ -89,17 +90,21 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Container _buildRemoveTrip() { return Container(
+  Container _buildRemoveTrip() {
+    return Container(
       color: Colors.red,
-    child: Padding(
-      padding: const EdgeInsets.all(16.0), child: Row(
-      mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-      Icon(
-        Icons.delete,
-        color: Colors.white,
-      ), ],
-    ), ),
-  ); }
-
-
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
